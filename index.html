@@ -3,101 +3,450 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Книжный клуб</title>
-    <link rel="stylesheet" href="styles.css">
-    <!-- Подключение Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <!-- FontAwesome для иконок -->
+    <title>Книжный клуб | Читайте и обсуждайте</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Основные стили */
+        :root {
+            --primary: #4a6fa5;
+            --secondary: #166088;
+            --light: #f8f9fa;
+            --dark: #343a40;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Шапка */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        .logo span {
+            color: var(--secondary);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: var(--primary);
+        }
+        
+        .burger {
+            display: none;
+            cursor: pointer;
+        }
+        
+        /* Герой-секция */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1507842217343-583bb7270b66?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding-top: 80px;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .btn:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        /* Секции */
+        section {
+            padding: 80px 0;
+        }
+        
+        section h2 {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 36px;
+            color: var(--secondary);
+        }
+        
+        /* О нас */
+        .about {
+            background-color: var(--light);
+        }
+        
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        /* Услуги */
+        .services {
+            background-color: white;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .service-card {
+            background: var(--light);
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .service-card i {
+            font-size: 40px;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .service-card h3 {
+            margin-bottom: 15px;
+            color: var(--secondary);
+        }
+        
+        /* Галерея */
+        .gallery {
+            background-color: var(--light);
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .gallery-item {
+            height: 250px;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        /* Контакты */
+        .contact {
+            background-color: white;
+        }
+        
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 50px;
+        }
+        
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        
+        .contact-form textarea {
+            height: 150px;
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .contact-item i {
+            font-size: 20px;
+            color: var(--primary);
+            margin-right: 15px;
+            width: 30px;
+            text-align: center;
+        }
+        
+        /* Подвал */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+        }
+        
+        .social-links {
+            margin-bottom: 20px;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 20px;
+            margin: 0 10px;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: var(--primary);
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+            }
+            
+            .burger {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 36px;
+            }
+            
+            .hero p {
+                font-size: 18px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- Header -->
+    <!-- Шапка -->
     <header>
-        <div class="logo">Книжный клуб</div>
-        <nav>
-            <ul class="nav-links">
-                <li><a href="#home">Главная</a></li>
-                <li><a href="#about">О нас</a></li>
-                <li><a href="#services">Услуги</a></li>
-                <li><a href="#gallery">Галерея</a></li>
-                <li><a href="#contact">Контакты</a></li>
-            </ul>
-            <div class="burger-menu">
-                <i class="fas fa-bars"></i>
-            </div>
-        </nav>
+        <div class="container header-container">
+            <div class="logo">Книжный <span>Клуб</span></div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Главная</a></li>
+                    <li><a href="#about">О нас</a></li>
+                    <li><a href="#services">Услуги</a></li>
+                    <li><a href="#gallery">Галерея</a></li>
+                    <li><a href="#contact">Контакты</a></li>
+                </ul>
+                <div class="burger">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
     </header>
 
-    <!-- Hero Section -->
+    <!-- Герой-секция -->
     <section id="home" class="hero">
-        <h1>Добро пожаловать в наш книжный клуб!</h1>
-        <p>Читайте, обсуждайте, вдохновляйтесь</p>
-        <button id="learn-more">Узнать больше</button>
+        <div class="container hero-content">
+            <h1>Добро пожаловать в наш книжный клуб!</h1>
+            <p>Читайте, обсуждайте, вдохновляйтесь вместе с единомышленниками</p>
+            <a href="#about" class="btn">Узнать больше</a>
+        </div>
     </section>
 
-    <!-- About Section -->
+    <!-- О нас -->
     <section id="about" class="about">
-        <h2>О нас</h2>
-        <p>Мы — сообщество любителей книг, где каждый может найти единомышленников.</p>
+        <div class="container">
+            <h2>О нас</h2>
+            <div class="about-content">
+                <p>Мы — сообщество любителей книг, где каждый может найти единомышленников. Наш клуб существует уже более 5 лет и объединяет более 500 участников. Мы регулярно проводим встречи, обсуждения книг и литературные вечера.</p>
+            </div>
+        </div>
     </section>
 
-    <!-- Services Section -->
+    <!-- Услуги -->
     <section id="services" class="services">
-        <h2>Наши услуги</h2>
-        <div class="service-list">
-            <div class="service-item">
-                <i class="fas fa-book"></i>
-                <h3>Книжные обсуждения</h3>
-                <p>Регулярные встречи для обсуждения книг.</p>
-            </div>
-            <div class="service-item">
-                <i class="fas fa-coffee"></i>
-                <h3>Книжные вечера</h3>
-                <p>Уютные встречи с чаем и интересными беседами.</p>
-            </div>
-            <div class="service-item">
-                <i class="fas fa-users"></i>
-                <h3>Авторские встречи</h3>
-                <p>Личное общение с писателями.</p>
+        <div class="container">
+            <h2>Наши услуги</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <i class="fas fa-book-open"></i>
+                    <h3>Книжные обсуждения</h3>
+                    <p>Регулярные встречи для обсуждения книг разных жанров. Каждую неделю мы выбираем новую книгу и делимся впечатлениями.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-coffee"></i>
+                    <h3>Книжные вечера</h3>
+                    <p>Уютные встречи с чаем и интересными беседами в атмосферной обстановке. Идеальное место для любителей литературы.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-user-edit"></i>
+                    <h3>Авторские встречи</h3>
+                    <p>Личное общение с писателями, вопросы и ответы, автограф-сессии. Мы регулярно приглашаем известных авторов.</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Gallery Section -->
+    <!-- Галерея -->
     <section id="gallery" class="gallery">
-        <h2>Галерея</h2>
-        <div class="gallery-grid">
-            <img src="img/book1.jpg" alt="Книга 1">
-            <img src="img/book2.jpg" alt="Книга 2">
+        <div class="container">
+            <h2>Галерея</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Книжный клуб">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Обсуждение книг">
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
+    <!-- Контакты -->
     <section id="contact" class="contact">
-        <h2>Контакты</h2>
-        <form id="contact-form">
-            <input type="text" placeholder="Ваше имя" required>
-            <input type="email" placeholder="Email" required>
-            <textarea placeholder="Ваше сообщение" required></textarea>
-            <button type="submit">Отправить</button>
-        </form>
-        <div class="contact-info">
-            <p><i class="fas fa-map-marker-alt"></i> г. Москва, ул. Книжная, 1</p>
-            <p><i class="fas fa-phone"></i> +7 (123) 456-7890</p>
-            <p><i class="fas fa-envelope"></i> info@bookclub.ru</p>
+        <div class="container">
+            <h2>Контакты</h2>
+            <div class="contact-container">
+                <form class="contact-form">
+                    <input type="text" placeholder="Ваше имя" required>
+                    <input type="email" placeholder="Email" required>
+                    <textarea placeholder="Ваше сообщение" required></textarea>
+                    <button type="submit" class="btn">Отправить</button>
+                </form>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>г. Москва, ул. Книжная, 15</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>+7 (123) 456-78-90</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>info@bookclub.ru</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- Footer -->
+    <!-- Подвал -->
     <footer>
-        <div class="social-links">
-            <a href="#"><i class="fab fa-vk"></i></a>
-            <a href="#"><i class="fab fa-telegram"></i></a>
-            <a href="#"><i class="fab fa-instagram"></i></a>
+        <div class="container">
+            <div class="social-links">
+                <a href="#"><i class="fab fa-vk"></i></a>
+                <a href="#"><i class="fab fa-telegram"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+            <p>&copy; 2023 Книжный Клуб. Все права защищены.</p>
         </div>
-        <p>&copy; 2024 Книжный клуб. Все права защищены.</p>
     </footer>
 
-    <script src="script.js"></script>
+    <script>
+        // Бургер-меню
+        document.querySelector('.burger').addEventListener('click', function() {
+            document.querySelector('nav ul').classList.toggle('active');
+        });
+
+        // Плавная прокрутка
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+                
+                // Закрываем меню после клика (для мобильной версии)
+                document.querySelector('nav ul').classList.remove('active');
+            });
+        });
+
+        // Валидация формы
+        document.querySelector('.contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Спасибо! Ваше сообщение отправлено.');
+            this.reset();
+        });
+    </script>
 </body>
 </html>
