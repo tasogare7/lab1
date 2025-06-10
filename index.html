@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Книжный клуб</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Подключение Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome для иконок -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">Книжный клуб</div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="#home">Главная</a></li>
+                <li><a href="#about">О нас</a></li>
+                <li><a href="#services">Услуги</a></li>
+                <li><a href="#gallery">Галерея</a></li>
+                <li><a href="#contact">Контакты</a></li>
+            </ul>
+            <div class="burger-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <h1>Добро пожаловать в наш книжный клуб!</h1>
+        <p>Читайте, обсуждайте, вдохновляйтесь</p>
+        <button id="learn-more">Узнать больше</button>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <h2>О нас</h2>
+        <p>Мы — сообщество любителей книг, где каждый может найти единомышленников.</p>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <h2>Наши услуги</h2>
+        <div class="service-list">
+            <div class="service-item">
+                <i class="fas fa-book"></i>
+                <h3>Книжные обсуждения</h3>
+                <p>Регулярные встречи для обсуждения книг.</p>
+            </div>
+            <div class="service-item">
+                <i class="fas fa-coffee"></i>
+                <h3>Книжные вечера</h3>
+                <p>Уютные встречи с чаем и интересными беседами.</p>
+            </div>
+            <div class="service-item">
+                <i class="fas fa-users"></i>
+                <h3>Авторские встречи</h3>
+                <p>Личное общение с писателями.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="gallery">
+        <h2>Галерея</h2>
+        <div class="gallery-grid">
+            <img src="img/book1.jpg" alt="Книга 1">
+            <img src="img/book2.jpg" alt="Книга 2">
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <h2>Контакты</h2>
+        <form id="contact-form">
+            <input type="text" placeholder="Ваше имя" required>
+            <input type="email" placeholder="Email" required>
+            <textarea placeholder="Ваше сообщение" required></textarea>
+            <button type="submit">Отправить</button>
+        </form>
+        <div class="contact-info">
+            <p><i class="fas fa-map-marker-alt"></i> г. Москва, ул. Книжная, 1</p>
+            <p><i class="fas fa-phone"></i> +7 (123) 456-7890</p>
+            <p><i class="fas fa-envelope"></i> info@bookclub.ru</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="social-links">
+            <a href="#"><i class="fab fa-vk"></i></a>
+            <a href="#"><i class="fab fa-telegram"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+        <p>&copy; 2024 Книжный клуб. Все права защищены.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
